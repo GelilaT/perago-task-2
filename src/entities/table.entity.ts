@@ -14,10 +14,10 @@ export class TableEntity{
     @OneToMany(() => ColumnEntity, (column) => column.table)
     columns: ColumnEntity[]
 
-    @Column()
-    schemaId: string
+    // @Column()
+    // schemaId: string
 
-    @ManyToOne(() => SchemaEntity, (schema) => schema.tables)
+    @ManyToOne(() => SchemaEntity, (schema) => schema.tables, { onDelete: 'CASCADE'})
     @JoinColumn({ name: 'schemaId' })
     schema: SchemaEntity
 

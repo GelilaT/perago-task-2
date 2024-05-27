@@ -1,0 +1,49 @@
+import { IsOptional, IsString, IsInt, IsBoolean } from 'class-validator';
+
+export class {{PascalCase ClassName}}Dto {
+{{#each Properties}}
+{{#if (eq Type 'string')}}
+@IsString()
+{{else if (eq Type 'number')}}
+@IsInt()
+{{else if (eq Type 'boolean')}}
+@IsBoolean()
+{{/if}}
+{{#if Nullable}}
+@IsOptional()
+{{/if}}
+{{camelCase Name}}: {{Type}};
+{{/each}}
+}
+
+export class Create{{PascalCase ClassName}}Dto {
+{{#each Properties}}
+{{#if (eq Type 'string')}}
+@IsString()
+{{else if (eq Type 'number')}}
+@IsInt()
+{{else if (eq Type 'boolean')}}
+@IsBoolean()
+{{/if}}
+{{#if Nullable}}
+@IsOptional()
+{{/if}}
+readonly {{camelCase Name}}: {{Type}};
+{{/each}}
+}
+
+export class Update{{PascalCase ClassName}}Dto {
+{{#each Properties}}
+{{#if (eq Type 'string')}}
+@IsString()
+{{else if (eq Type 'number')}}
+@IsInt()
+{{else if (eq Type 'boolean')}}
+@IsBoolean()
+{{/if}}
+{{#if Nullable}}
+@IsOptional()
+{{/if}}
+{{camelCase Name}}: {{Type}};
+{{/each}}
+}

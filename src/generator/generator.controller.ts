@@ -1,16 +1,19 @@
 import { Body, Controller, Get, Param } from "@nestjs/common"
 import { CodeGeneratorService } from "./generator.service"
-import { TableService } from "src/table/table.service"
 
 @Controller('generator')
 export class GeneratorController {
-    constructor(private generatorService: CodeGeneratorService,
-        private tableService: TableService
+    constructor(private codeGeneratorService: CodeGeneratorService,
     ) { }
     
     @Get(':id')
-    async getEntityCode(@Param('id') id: string, @Body() file: {}) {
-        return this.generatorService.generateCode(id, file)
+    async generateSchemas(@Param('id') id: string) {
+        await this.codeGeneratorService.generateSchemaCode(id)
+        await this.codeGeneratorService.generateController(id)
+        await this.codeGeneratorService.generateModule(id)
+        await this.codeGeneratorService.generateService(id)
     }
+
+
 
 }

@@ -11,10 +11,10 @@ export class ColumnEntity{
     @Column()
     name: string
 
-    @Column()
-    tableId : string
+    // @Column()
+    // tableId : string
 
-    @ManyToOne(() => TableEntity, (table) => table.columns)
+    @ManyToOne(() => TableEntity, (table) => table.columns, { onDelete: 'CASCADE'})
     @JoinColumn({name: 'tableId'})
     table: TableEntity
 
@@ -30,6 +30,9 @@ export class ColumnEntity{
     @Column()
     isForeign: boolean
 
+    // @Column()
+    // isUnique: boolean
+
     @Column({
         type: 'enum',
         enum: RelationType,
@@ -37,8 +40,8 @@ export class ColumnEntity{
     })
     relationType: RelationType
 
-    @Column()
-    backref: string
+    // @Column()
+    // backref: string
 
     @Column({ default: false })
     isGenerated: boolean

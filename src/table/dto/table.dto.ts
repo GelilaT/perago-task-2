@@ -16,7 +16,7 @@ export class TableDto{
     constructor(table: TableEntity) {
         this.id = table.id;
         this.name = table.name;
-        this.schemaId = table.schemaId
+        // this.schemaId = table.schemaId
     }
 
 }

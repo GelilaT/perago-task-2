@@ -54,7 +54,7 @@ export class ColumnService {
             throw new Error(err.message)
         }
             
-        }
+    }
     
     async findAll() {
         return await this.columnRepository.find()

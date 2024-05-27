@@ -1,0 +1,29 @@
+import { Entity, PrimaryGeneratedColumn, Column, {{#each Relationships}}{{PascalCase RelationshipType}}, {{/each}} } from 'typeorm';
+{{#each Relationships}}
+import { {{RelatedEntity}} } from './{{camelCase RelatedEntity}}.entity';
+{{/each}}
+
+@Entity()
+export class {{PascalCase ClassName}} {
+
+{{#if PrimaryKey}}
+@PrimaryGeneratedColumn({{#if (eq PrimaryKeyType "string")}}"uuid"{{else}}"int"{{/if}})
+{{camelCase PrimaryKey}}: {{#if PrimaryKeyType}}{{PrimaryKeyType}}{{else}}number{{/if}};
+{{/if}}
+
+{{#each Properties}}
+@Column({
+nullable: {{Nullable}},
+{{#if Unique}}
+unique: true,
+{{/if}}
+})
+{{camelCase Name}}: {{Type}};
+{{/each}}
+
+{{#each Relationships}}
+@{{PascalCase RelationshipType}}(() => {{RelatedEntity}}, ({{RelatedProperty}}) => {{RelatedProperty}}{{camelCase
+RelatedEntity}})
+{{camelCase RelatedEntity}}: {{RelatedEntity}};
+{{/each}}
+}

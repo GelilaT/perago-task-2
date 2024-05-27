@@ -1,0 +1,35 @@
+import { Controller, Get, Post, Put, Delete, Param, Body, ParseIntPipe } from '@nestjs/common';
+import { {{PascalCase ClassName}}Service } from './{{kebabCase ClassName}}.service';
+import { Create{{PascalCase ClassName}}Dto } from './dto/create{{kebabCase ClassName}}.dto';
+import { Update{{PascalCase ClassName}}Dto } from './dto/update{{kebabCase ClassName}}.dto';
+
+@Controller('{{kebabCase ClassName}}')
+export class {{PascalCase ClassName}}Controller {
+constructor(private readonly {{camelCase ClassName}}Service: {{PascalCase ClassName}}Service) {}
+
+@Post()
+create(@Body() create{{PascalCase ClassName}}Dto: Create{{PascalCase ClassName}}Dto) {
+return this.{{camelCase ClassName}}Service.create(create{{PascalCase ClassName}}Dto);
+}
+
+@Get()
+findAll() {
+return this.{{camelCase ClassName}}Service.findAll();
+}
+
+@Get(':id')
+findOne(@Param('id', ParseIntPipe) id: number) {
+return this.{{camelCase ClassName}}Service.findOne(id);
+}
+
+@Put(':id')
+update(@Param('id', ParseIntPipe) id: number, @Body() update{{PascalCase ClassName}}Dto: Update{{PascalCase
+ClassName}}Dto) {
+return this.{{camelCase ClassName}}Service.update(id, update{{PascalCase ClassName}}Dto);
+}
+
+@Delete(':id')
+remove(@Param('id', ParseIntPipe) id: number) {
+return this.{{camelCase ClassName}}Service.remove(id);
+}
+}
